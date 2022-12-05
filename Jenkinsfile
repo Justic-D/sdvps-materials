@@ -1,18 +1,23 @@
 pipeline {
- agent main
- stages {
-  stage('Git') {
-   steps {git 'https://github.com/Justic-D/sdvps-materials.git'}
+  agent any
+  parameters {
+    gitParameter branchFilter: 'origin/(.*)', defaultValue: 'main', name: 'BRANCH', type: 'PT_BRANCH'
   }
-  stage('Test') {
-   steps {
-    sh '/usr/local/go/bin/go test .'
-   }
+  stages {
+    stage('Git') {
+      steps {
+        git branch: "${params.BRANCH}", url: 'https://github.com/Justic-D/sdvps-materials.git'
+      }      
   }
-  stage('Build') {
-   steps {
-    sh 'docker build .'
-   }
+    stage('Test') {
+      steps {
+        sh '/usr/local/go/bin/go test .'
+      }
+  }
+    stage('Build') {
+      steps {
+        sh 'docker build .'
+      }
   }
  }
 }
