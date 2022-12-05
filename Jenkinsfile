@@ -1,15 +1,18 @@
-stages:
-  - test
-  - build
-
-test:
-  stage: test
-  image: golang:1.17
-  script: 
-   - go test .
-
-build:
-  stage: build
-  image: docker:latest
-  script:
-   - docker build .
+pipeline {
+ agent any
+ stages {
+  stage('Git') {
+   steps {git 'https://github.com/Justic-D/sdvps-materials.git'}
+  }
+  stage('Test') {
+   steps {
+    sh '/usr/local/go/bin/go test .'
+   }
+  }
+  stage('Build') {
+   steps {
+    sh 'docker build .'
+   }
+  }
+ }
+}
