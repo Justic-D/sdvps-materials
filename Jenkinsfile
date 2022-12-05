@@ -1,5 +1,5 @@
 pipeline {
- agent any
+ agent main
  stages {
   stage('Git') {
    steps {git 'https://github.com/Justic-D/sdvps-materials.git'}
