@@ -1,6 +1,7 @@
 pipeline {
     agent any
-
+    
+    stages {
       stage('Проверка') {
         steps {
           echo 'Выполняем проверку работы'
