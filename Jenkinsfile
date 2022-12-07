@@ -1,13 +1,6 @@
 pipeline {
     agent any
 
-    stages {
-      stage('Git_Repo') {
-        steps {
-          git 'https://github.com/Justic-D/sdvps-materials.git'
-          sh 'ls -la'
-        }
-      }
       stage('Проверка') {
         steps {
           echo 'Выполняем проверку работы'
