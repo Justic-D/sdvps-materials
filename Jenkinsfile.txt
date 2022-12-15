@@ -1,0 +1,17 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Git') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Justic-D/sdvps-materials.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'go build /usr/local/go/bin/ts.go '
+                sh 'curl -u admin:admin http://192.168.1.14:8081/repository/my-netology/ --upload-file ts'
+            }
+        }
+    }
+}
